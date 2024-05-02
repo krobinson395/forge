@@ -1,0 +1,11 @@
+Name:Kappa Cannoneer
+Mana Cost: 5 U
+Types: Artifact Creature Turtle Warrior
+PT:4/4
+K:Improvise
+K:Ward:4
+T:Mode$ChangesZone | ValidCards$Card.Self,Artifact.Other+YouCtrl | Destination$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever CARDNAME or another artifact enters the battlefield under your control, put a +1/+1 counter on CARDNAME and it can't be blocked this turn.
+SVar:TrigCounter:DB$PutCounter | CounterType$ P1/P1 | CounterNum$ 1 | SubAbility$DBUnblockable
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+Oracle:Improvise Ward 4  Whenever Kappa Cannoneer or another artifact enters the battlefield under your control put a +1/+1 counter on Kappa Cannoneer and it can't be blocked this turn.
