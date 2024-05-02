@@ -1,0 +1,9 @@
+Name: Flare of Malice
+ManaCost:2 B B
+Types:Instant
+S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ Sac<1/Creature.Black+nonToken/a nontoken black creature> | Description$ You may sacrifice a nontoken black creature rather than pay this spell's mana cost.
+A:SP$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChooseCard
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices Creature.TargetedPlayerCtrl+cmcEQX, Planeswalker.TargetedPlayerCtrl+cmcEQX | ChoiceTitle$ Choose a creature or planeswalker with the greatest mana value to sacrifice | Mandatory$ True | SubAbility$ DBSac
+SVar:DBSac:DB$ SacrificeAll | ValidCards$ Card.isRemembered | SubAbility$ DBCleanup | StackDescription$ Each Opponent Sacrifices a creature or planeswalker with the highest mana value they control
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.TargetedPlayerCtrl,Planeswalker.TargetedPlayerCtrl$GreatestCMC
